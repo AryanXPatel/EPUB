@@ -7,20 +7,23 @@ const path = require("path");
 const app = express();
 
 // Security headers (relaxed for now)
+
 app.use(
   helmet({
     contentSecurityPolicy: {
       directives: {
+        defaultSrc: ["'self'"],
         scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
         styleSrc: ["'self'", "'unsafe-inline'"],
         imgSrc: ["'self'", "data:", "blob:"],
-        connectSrc: ["*"],
+        connectSrc: ["'self'"],
         objectSrc: ["'none'"],
         upgradeInsecureRequests: [],
       },
     },
   })
 );
+
 app.use(cors());
 app.use(compression());
 
